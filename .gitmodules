@@ -16,3 +16,6 @@
 [submodule "lib/hardhat-deploy"]
 	path = lib/hardhat-deploy
 	url = https://github.com/wighawag/hardhat-deploy
+[submodule "contracts/lib/LayerZero-v2"]
+	path = contracts/lib/LayerZero-v2
+	url = https://github.com/LayerZero-Labs/LayerZero-v2
