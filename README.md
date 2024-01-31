@@ -29,3 +29,22 @@ As of now, the ZExecutor does not support any of the following:
 * **Recovery** - The ZExecutor can permanently crash pretty easily as there's no "looking back" at the start of the executor, nor is there transaction failure handling. As soon as a transaction failed to commit for one reason or another, the ZExecutor is likely to become permanently stuck. Things such as insufficient gas in the executor wallets will also not be gracefully monitored or handled.
 
 However, it should be clear that all of these shortcomings can be trivially solved in a production environment. Integrating things such as multiple wallets and a database to keep track of messages and execution state would already address most of these. Having an algorithm to fetch historical events would solve recovery (though some RPCs do not support archival for events which are a long time ago). It should be clear by now that this repository focuses on the **business logic** of interpreting and executing LayerZero messages, and not on providing a production-ready environment.
+
+## Testing
+
+The ZExecutor was not written with testability in mind, as it would make the codebase more verbose given that testability requires abstraction. However, there are a few basic unit tests for the stuff that can be tested and there's a single large integration test that runs on mainnet and sends messages between three real chains. The latter takes a few minutes to complete as it needs to deploy the executors and an example app on each chain.
+
+Unit tests:
+
+```
+yarn test
+```
+
+Integration tests (requires the private key to have $1 in gas on Core, Celo and Gnosis):
+
+```
+export PRIVATE_KEY="0x..."
+yarn integration
+```
+
+Note that the integration test will re-use previous deployments. In case the previous deployment of the apps is bricked (eg. due to a commit not having been forwarded), you simply delete `contracts/cache/integration`, which stores the contract addresses.
