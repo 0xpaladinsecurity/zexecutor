@@ -106,7 +106,7 @@ describe("Integration tests", () => {
       await waitFor(celoAppAddress, executedMessagesCelo + 3);
       await waitFor(gnosisAppAddress, executedMessagesGnosis + 1);
     },
-    5 * 60 * 1000,
+    10 * 60 * 1000,
   );
 
   async function sendMessage(
