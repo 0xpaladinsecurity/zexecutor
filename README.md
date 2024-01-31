@@ -18,6 +18,25 @@ We've provided a simple example in `contracts/src/SimpleExecutor`. A deployment 
 
 The code within this repository can serve as a useful reference to anyone building a real executor, and illustrates that anyone *can* build such an executor.
 
+## Design specification
+Though the ZEXecutor aims to be simple, there are still a few files in the repository. We'll guide you through them here:
+
+The ZExecutor splits the executor's responsibility in two roles:
+- Event provisioning (listening for events on source chains)
+- Event execution (executing them on the destination chains)
+
+This division of responsibility makes so much sense that within a production environment, you would almost certainly decide to split these roles into their own applications, which only communicate via a database or messaging bus.
+
+We've implemented each of these roles with [Viem](https://viem.sh/) as the web3 library, however, using ethers or web3.js would work just as well. The [ViemProvider](./src/providers/viemprovider.ts) is therefore responsible for monitoring a source chain continuously for `PacketSent` events, which are emitted whenever a message gets sent through an endpoint. Whenever such a message is sent, the provider will validate that our executor actually got paid (as its possible that this message was for another executor). This validation has to be done with extreme care as a transaction may contain multiple messages and bad validation logic would allow multiple messages in a transaction to get executed while only one of them paid the executor. The `processLog` function within the [ViemProvider](./src/providers/viemprovider.ts) is therefore a great function for you to look at if you want to learn how to actually validate that your executor got paid. The algorithm boils down to looking back at any logs preceding `PacketSent`, looking for an `ExecutorPaid` event, and giving up as soon as a previous `PacketSent` is reached. The executor payment needs to be carefully validated as well, as to avoid a fake event being detected.
+
+Once an event is validated by the provider, it will forward it to the [ZExecutor](./src/zexecutor.ts) sorting function, which simply adds it to the execution queue of the [ViemExecutor](./src/executors/viemexecutor.ts) of the destination chain.
+
+Each [ViemExecutor](./src/executors/viemexecutor.ts) has an execution queue that it continuously processes. New messages get put at the back of this queue while the executor processes them in a FIFO manner. Once a message has enough DVN attestations, the executor will commit the verification of that message on the destination chain. Afterwards, it will actually execute the message.
+
+To verify these two separate states (commitable and executable), view function contracts deployed by LayerZero are used. These utility contracts provide a useful view function that returns the current state of any message on the destination chains.
+
+Once a message is fully executed, it's popped from the execution queue. However, whenever further processing is required, that message gets pushed back to the end of the queue for re-trial.
+
 ## What does the ZExecutor not do?
 
 As of now, the ZExecutor does not support any of the following:
