@@ -1,6 +1,8 @@
 # zexecutor
 The most basic LayerZero V2 executor example, period.
 
+*Disclaimer: The ZExecutor is provided as-is and for informational purposes only. It is not meant for production usage or any other sort of real-world usage or with private keys with real value on them.*
+
 ## Getting started
 The ZExecutor requires an executor to be deployed on every configured chain. Once you update the configuration, you can run the following command.
 
