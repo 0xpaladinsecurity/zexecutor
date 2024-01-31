@@ -28,3 +28,6 @@
 [submodule "contracts/lib/hardhat-deploy"]
 	path = contracts/lib/hardhat-deploy
 	url = https://github.com/wighawag/hardhat-deploy
+[submodule "contracts/lib/solidity-bytes-utils"]
+	path = contracts/lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
