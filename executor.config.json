@@ -1,0 +1,37 @@
+{
+  "chains": {
+    "1116": {
+      "name": "Core",
+      "rpc": "https://rpc.ankr.com/core",
+      "endpoint": "0x1a44076050125825900e736c501f859c50fE728c",
+      "trustedSendLib": "0x0BcAC336466ef7F1e0b5c184aAB2867C108331aF",
+      "trustedReceiveLib": "0x8F76bAcC52b5730c1f1A2413B8936D4df12aF4f6",
+      "trustedReceiveLibView": "0x8D183A062e99cad6f3723E6d836F9EA13886B173",
+      "executor": "0x4DDE6dAD12A8DC6FaC9386B4D55Dd43379eCa832",
+      "endpointView": "0xF08f13c080fcc530B1C21DE827C27B7b66874DDc",
+      "eid": 30153
+    },
+    "42220": {
+      "name": "Celo",
+      "rpc": "https://rpc.ankr.com/celo",
+      "endpoint": "0x1a44076050125825900e736c501f859c50fE728c",
+      "trustedSendLib": "0x42b4E9C6495B4cFDaE024B1eC32E09F28027620e",
+      "trustedReceiveLib": "0xaDDed4478B423d991C21E525Cd3638FBce1AaD17",
+      "trustedReceiveLibView": "0x0Aa32E92879Cfc4a91c64e7A43C5a8794fDdaBba",
+      "executor": "0xa2ccE56968EDab94a478B6c1283914969c68Bba9",
+      "endpointView": "0x6c47E59BC0600942146BF37668fc92b369C85ab7",
+      "eid": 30125
+    },
+    "100": {
+      "name": "Gnosis",
+      "rpc": "https://rpc.ankr.com/gnosis",
+      "endpoint": "0x1a44076050125825900e736c501f859c50fE728c",
+      "trustedSendLib": "0x3C156b1f625D2B4E004D43E91aC2c3a719C29c7B",
+      "trustedReceiveLib": "0x9714Ccf1dedeF14BaB5013625DB92746C1358cb4",
+      "trustedReceiveLibView": "0x6c47E59BC0600942146BF37668fc92b369C85ab7",
+      "executor": "0xbB04347bb9692900C53CA775a7B3BE8F8EB2EC5F",
+      "endpointView": "0xe70cA542A9f2D932aD34efE3a681D83828452666",
+      "eid": 30145
+    }
+  }
+}
